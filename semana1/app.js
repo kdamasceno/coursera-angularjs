@@ -5,23 +5,25 @@ angular.module('LunchCheck', [])
 .controller('LunchCheckController', LunchCheckController);
 
 LunchCheckController.$inject = ['$scope'];
-function LunchCheckController($scope) {
-  $scope.message = "";
-  $scope.lunch-menu = "";
 
-  // $scope.sayMessage = function () {
-  //   return "Yaakov likes to eat healthy snacks at night!";
-  // };
+function LunchCheckController($scope) {
+  $scope.mymessage = "";
+  $scope.menu = "";
 
   $scope.checkLunch = function () {
-    var list = lunch-menu.split(",");
-	console.log(list.length);
-	if (list.length <= 0){
-		$scope.message = "Please enter data first";
-	} else if (list.length <= 3){
-		$scope.message = "Enjoy!";
+    	
+	var list = $scope.menu.split(",");
+	
+	if ($scope.menu == ""){
+		$scope.mymessage = "Please enter data first";
+		return;
+	} 
+
+	
+	if (list.length <= 3){
+		$scope.mymessage = "Enjoy!";
 	} else {
-		$scope.message = "Too much!";
+		$scope.mymessage = "Too much!";
 	}
   };
 
