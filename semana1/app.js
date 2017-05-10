@@ -4,27 +4,36 @@
 angular.module('LunchCheck', [])
 .controller('LunchCheckController', LunchCheckController);
 
-LunchCheckController.$inject = ['$scope'];
+LunchCheckController.$inject = ['$scope', '$filter'];
 
-function LunchCheckController($scope) {
-  $scope.mymessage = "";
+function LunchCheckController($scope, $filter) {
   $scope.menu = "";
+  $scope.mymessage = "Please enter data first";
+  $scope.color = "red";
 
   $scope.checkLunch = function () {
     	
-	var list = $scope.menu.split(",");
+	var itens = $scope.menu
+	.split(",")
+	.filter(
+		function (item){
+			// filtra e retorna apenas itens com length > 0
+			return item.trim().length > 0;
+		});
 	
-	if ($scope.menu == ""){
+	if (itens.length <= 0){
 		$scope.mymessage = "Please enter data first";
+		$scope.color = "red";
 		return;
-	} 
+	}
 
-	
-	if (list.length <= 3){
+	$scope.color = "green";
+	if (itens.length <= 3){
 		$scope.mymessage = "Enjoy!";
 	} else {
 		$scope.mymessage = "Too much!";
 	}
+
   };
 
 }
