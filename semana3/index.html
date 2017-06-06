@@ -13,14 +13,15 @@
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
     <div class="form-group">
-      <input type="text" placeholder="search term" class="form-control" ng-model="narrow.menu_item">
+      <input type="text" placeholder="search term" class="form-control" ng-model="narrow.searchTerm">
     </div>
 
-    <div class="form-group narrow-button" ng-click="narrow.found()">
-      <button class="btn btn-primary">Narrow It Down For Me!</button>
+    <div class="form-group narrow-button">
+      <button class="btn btn-primary" ng-click="narrow.found()">Narrow It Down For Me!</button>
     </div>
 
     <!-- found-items should be implemented as a component -->
+    <div style="clear:both"></div>
     <found-items found-items="list.foundItems" on-remove="list.removeItem(index)"></found-items>
   </div>
 
