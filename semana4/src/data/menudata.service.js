@@ -2,53 +2,40 @@
 'use strict';
 
 angular.module('data')
-.service('MenuDataService', MenuDataService);
+.service('MenuDataService', MenuDataService)
+.constant('ApiBasePath', "https://davids-restaurant.herokuapp.com");
 
 
-MenuDataService.$inject = ['$q', '$timeout', '$http']
-function MenuDataService($q, $timeout, $http) {
+MenuDataService.$inject = ['$http','ApiBasePath'];
+function MenuDataService($http, ApiBasePath) {
   var service = this;
 
-  // List of shopping items
-  var items = [];
-
-  // Simulates call to server
-  // Returns a promise, NOT items array directly
-  service.getItems = function () {
-    var deferred = $q.defer();
-
-    // Wait 2 seconds before returning
-    $timeout(function () {
-      // deferred.reject(items);
-      deferred.resolve(items);
-    }, 800);
-
-    return deferred.promise;
-  };
-}
-
- service.getAllCategories = function () {
+  service.getAllCategories = function () {
     var response = $http({
       method: "GET",
-      url: "https://davids-restaurant.herokuapp.com/categories.json"      
-    }).then(function (result) {
-        // return result.data.menu_items;
-        return result;  
-        });
+      url: (ApiBasePath + "/categories.json")      
+    }).then(function(result){
+        return result.data;
+    });
 
     return response;
   };
 
-
-service.getItemsForCategory = function (categoryShortName) {
-var response = $http({
+  service.getItemsForCategory = function (categoryShortName) {
+    var response = $http({
       method: "GET",
-      url: "https://davids-restaurant.herokuapp.com/menu_items.json?category",
+      url: (ApiBasePath + "/menu_items.json"),
+      params: {
+        category: categoryShortName
+      }
+    }).then(function(result){
+      console.log("itens "+result.menu_items);
+        return result.menu_items;
+    });
 
-    }).then(function (result) {
-        return result;  
-        });
     return response;
-};
+  };
+
+}
 
 })();

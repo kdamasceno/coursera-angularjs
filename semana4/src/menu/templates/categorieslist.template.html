@@ -1,3 +1,6 @@
-<a ui-sref="home">Home</a> &lt; <span>Lista de Categorias</span>
-
-<categories items="mainList.items"></categories>
+<ul>
+  <li ng-repeat="item in $ctrl.items"
+      ui-sref="itemDetail({itemId: $index})">
+    {{ item.short_name }} - {{ item.name }}
+  </li>
+</ul>

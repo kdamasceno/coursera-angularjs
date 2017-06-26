@@ -20,9 +20,9 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   })
 
   // Página de categorias
-  .state('categories', {
+  .state('categoriesList', {
     url: '/categories',
-    templateUrl: 'src/menu/templates/categorieslist.template.html',
+    templateUrl: 'src/menu/templates/categories.template.html',
     controller: 'CategoriesListController as categoriesList',
     resolve: {
       items: ['MenuDataService', function (MenuDataService) {
@@ -32,20 +32,20 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   })
   
   // Página de detalhes de uma categoria
-  // .state('itemDetail', {
-  //   url: '/item-detail/{itemId}',
-  //   templateUrl: 'src/menu/templates/item-detail.template.html',
-  //   controller: 'ItemDetailController as itemDetail',
-  //   resolve: {
-  //     item: ['$stateParams', 'ShoppingListService',
-  //           function ($stateParams, ShoppingListService) {
-  //             return ShoppingListService.getItems()
-  //               .then(function (items) {
-  //                 return items[$stateParams.itemId];
-  //               });
-  //           }]
-  //   }
-  // })
+  .state('categoriesList.itemDetail', {
+    url: '/items/{itemId}',
+    templateUrl: 'src/menu/templates/item-detail.template.html',
+    controller: 'ItemDetailController as itemDetail',
+    resolve: {
+      item: ['$stateParams', 'MenuDataService',
+            function ($stateParams, MenuDataService) {
+              return MenuDataService.getItemsForCategory()
+                .then(function (items) {
+                  return items[$stateParams.itemId];
+                });
+            }]
+    }
+  })
   
   ;
 }
