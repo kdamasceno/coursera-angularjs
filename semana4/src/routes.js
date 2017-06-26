@@ -31,22 +31,19 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     }
   })
   
-  // Página de detalhes de uma categoria
-  .state('categoriesList.itemDetail', {
-    url: '/items/{itemId}',
-    templateUrl: 'src/menu/templates/item-detail.template.html',
-    controller: 'ItemDetailController as itemDetail',
+  // Página de items de uma categoria
+  .state('itemsList', {
+    url: '/items/{categoryShortName}',
+    templateUrl: 'src/menu/templates/items.template.html',
+    controller: 'ItemsController as itemsList',
     resolve: {
-      item: ['$stateParams', 'MenuDataService',
+      itemsForCategory: ['$stateParams', 'MenuDataService',
             function ($stateParams, MenuDataService) {
-              return MenuDataService.getItemsForCategory()
-                .then(function (items) {
-                  return items[$stateParams.itemId];
-                });
+              return MenuDataService.getItemsForCategory($stateParams.categoryShortName);
             }]
-    }
+      },
   })
-  
+
   ;
 }
 

@@ -1,14 +1,5 @@
-<a ui-sref="home">Home</a> &lt;
-<a ui-sref="categories">Lista de Categorias</a> &lt;
+Voltar para página <a ui-sref="home">Home</a><br>
+Voltar para página <a ui-sref="categoriesList">Categorias</a><br><br>
 
-<span> {{ itemDetail.name }} </span>
-<div>Item name: {{ itemDetail.name }}</div>
-<div>Item quantity: {{ itemDetail.quantity }}</div>
-<div>Item description: {{ itemDetail.description }}</div>
-
-<ul>
-  <li ng-repeat="item in $ctrl.items">
-    <div>{{ item.short_name }} - {{ item.name }}</div>
-    <div>{{ item.description }}</div>
-  </li>
-</ul>
+<span>Lista de Itens de Menu</span>
+<items items-for-category="itemsList.itemsForCategory"></items>

@@ -2,11 +2,11 @@
 'use strict';
 
 angular.module('MenuApp')
-.component('itemDetail', {
-  templateUrl: 'src/menu/templates/item-detail.template.html',
-  bindings: {
-    items: '<'
-  }
+.component('items', {
+   templateUrl: 'src/menu/templates/itemsList.template.html',
+   bindings: {
+    itemsForCategory: '<'
+   }
 });
 
 })();
